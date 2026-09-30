@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "status": "fail",
+  "cases": [
+    {
+      "delay_ms": 10,
+      "failures": [
+        {
+          "assertion": 0,
+          "kind": "hidden"
+        }
+      ],
+      "error": null,
+      "repeatable": true,
+      "minimal_interruptions": [
+        {
+          "kind": "escape"
+        }
+      ],
+      "repro": {
+        "url": "http://127.0.0.1:61491/broken.html",
+        "trigger": "#open",
+        "delays_ms": [
+          10
+        ],
+        "settle_ms": 250,
+        "interruptions": [
+          {
+            "kind": "escape"
+          }
+        ],
+        "assertions": [
+          {
+            "kind": "hidden",
+            "selector": "#overlay"
+          },
+          {
+            "kind": "hidden",
+            "selector": "#menu"
+          },
+          {
+            "kind": "focused",
+            "selector": "#open"
+          }
+        ]
+      }
+    },
+    {
+      "delay_ms": 80,
+      "failures": [
+        {
+          "assertion": 0,
+          "kind": "hidden"
+        }
+      ],
+      "error": null,
+      "repeatable": true,
+      "minimal_interruptions": [
+        {
+          "kind": "escape"
+        }
+      ],
+      "repro": {
+        "url": "http://127.0.0.1:61491/broken.html",
+        "trigger": "#open",
+        "delays_ms": [
+          80
+        ],
+        "settle_ms": 250,
+        "interruptions": [
+          {
+            "kind": "escape"
+          }
+        ],
+        "assertions": [
+          {
+            "kind": "hidden",
+            "selector": "#overlay"
+          },
+          {
+            "kind": "hidden",
+            "selector": "#menu"
+          },
+          {
+            "kind": "focused",
+            "selector": "#open"
+          }
+        ]
+      }
+    },
+    {
+      "delay_ms": 180,
+      "failures": [],
+      "error": null,
+      "repeatable": null
+    }
+  ],
+  "scope": "Only the declared end-state assertions are checked. Fresh browser storage for every attempt."
+}

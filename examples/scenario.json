@@ -1,0 +1,29 @@
+{
+  "url": "http://127.0.0.1:8765/fixed.html",
+  "trigger": "#open",
+  "delays_ms": [
+    10,
+    80,
+    180
+  ],
+  "settle_ms": 250,
+  "interruptions": [
+    {
+      "kind": "escape"
+    }
+  ],
+  "assertions": [
+    {
+      "kind": "hidden",
+      "selector": "#overlay"
+    },
+    {
+      "kind": "hidden",
+      "selector": "#menu"
+    },
+    {
+      "kind": "focused",
+      "selector": "#open"
+    }
+  ]
+}

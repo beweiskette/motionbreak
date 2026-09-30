@@ -1,0 +1,10 @@
+<!doctype html><meta charset="utf-8"><title>MotionBreak fixture</title>
+<style>body{font:18px system-ui;padding:4rem;background:#142330;color:#eaf5f5}button{padding:1rem}#overlay{position:fixed;inset:0;background:#0009;pointer-events:none}#menu{position:relative;padding:2rem;background:#356}</style>
+<h1>Interrupted menu transition</h1><p>Open the menu, then press Escape before the overlay fades in.</p>
+<button id="open">Open menu</button><div id="overlay" hidden></div><div id="menu" hidden>Menu content</div>
+<script>
+const trigger=document.querySelector('#open'),overlay=document.querySelector('#overlay'),menu=document.querySelector('#menu');
+let timer;
+trigger.onclick=()=>{menu.hidden=false; timer=setTimeout(()=>{overlay.hidden=false},150)};
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){clearTimeout(timer); menu.hidden=true;overlay.hidden=true;trigger.focus()}});
+</script>

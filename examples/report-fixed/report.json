@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "cases": [
+    {
+      "delay_ms": 10,
+      "failures": [],
+      "error": null,
+      "repeatable": null
+    },
+    {
+      "delay_ms": 80,
+      "failures": [],
+      "error": null,
+      "repeatable": null
+    },
+    {
+      "delay_ms": 180,
+      "failures": [],
+      "error": null,
+      "repeatable": null
+    }
+  ],
+  "scope": "Only the declared end-state assertions are checked. Fresh browser storage for every attempt."
+}
