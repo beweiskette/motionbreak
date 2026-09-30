@@ -1,16 +1,12 @@
-# Version 0.1 design
+# Design
 
-Interrupt a UI transition at several timings, check the declared final state, then reduce repeatable failures to a smaller interruption sequence.
+Reproduce and minimise UI transition failures with explicit browser contracts.
 
-The design was reviewed once through a read-only Claude adapter before implementation. That consultation received feature proposals and synthetic examples, not repository contents or credentials. Implementation and local verification were performed separately; the consultation was a design review, not a code audit.
+Chromium starts with its sandbox enabled. The selected `localhost` origin tries the pinned loopback addresses 127.0.0.1 and ::1. An unavailable initial page is a setup error (exit 2); a failed DOM contract is a finding (exit 1).
 
-The selected scope favours explicit user contracts and local evidence. Automatic uploads, model-generated pass criteria, background monitoring and publishing are excluded. This version makes no claim that the idea is unique or that it will attract a particular number of GitHub stars.
+Assertion selectors must be standard CSS in the main document. All predicates are evaluated together in one JavaScript turn and retried every 25 ms until the largest assertion `timeout_ms` expires (default 1000 ms). Count checks all matching nodes; the other predicates require one node, except that hidden also accepts no match. Text comparison collapses whitespace. Shadow-root and Playwright-specific assertion selectors are outside this version. Trigger selectors retain Playwright syntax.
 
-## Acceptance evidence
-
-Set `BROWSER_TEST=1` after installing Playwright Chromium, or set `TEST_BROWSER` to an existing Chromium executable. The integration test runs both the fixed and intentionally broken fixture and checks the reduced reproduction.
-
-## Deliberate limits
+## Scope
 
 A failure must reproduce twice before minimisation. Each deletion candidate must preserve the same assertion signature twice. The reducer finds a deletion-minimal sequence for the supplied timings, not a globally smallest browser program. Reports distinguish non-repeatable failures from confirmed ones. `repro` objects can be saved directly as scenario JSON and rerun.
 

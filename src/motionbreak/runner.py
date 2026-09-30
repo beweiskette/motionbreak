@@ -5,7 +5,9 @@ from .minimize import minimize
 def attempt(spec, delay, events, executable, allow_remote):
     with session(spec['url'], executable, allow_remote) as (page, context, proxy):
         try:
-            page.goto(spec['url'], wait_until='domcontentloaded')
+            response = page.goto(spec['url'], wait_until='domcontentloaded')
+            if response is not None and response.status >= 400:
+                raise ValueError(f'Initial page returned HTTP {response.status}; check the server and URL')
             page.locator(spec['trigger']).click()
             page.wait_for_timeout(delay)
             for event in events:
@@ -15,8 +17,8 @@ def attempt(spec, delay, events, executable, allow_remote):
             page.wait_for_timeout(spec.get('settle_ms', 250))
             failures = assertions(page, spec['assertions'])
             return {'failures': failures, 'error': None}
-        except Exception:
-            return {'failures': [], 'error': 'navigation-or-action-failed'}
+        except Exception as exc:
+            return {'failures': [], 'error': str(exc).splitlines()[0]}
 
 def run(spec, executable=None, allow_remote=False):
     validate(spec)

@@ -31,6 +31,12 @@ Assertions use `kind` and `selector`. Kinds are `visible`, `hidden`, `focused`, 
 
 Reports are local JSON and self-contained HTML. Exit status is 0 for a pass, 1 for findings, and 2 for an input or runtime setup error. Commands do not publish reports or contact a model API.
 
+## Input and runtime details
+
+Chromium starts with its sandbox enabled. The selected `localhost` origin tries the pinned loopback addresses 127.0.0.1 and ::1. An unavailable initial page is a setup error (exit 2); a failed DOM contract is a finding (exit 1).
+
+Assertion selectors must be standard CSS in the main document. All predicates are evaluated together in one JavaScript turn and retried every 25 ms until the largest assertion `timeout_ms` expires (default 1000 ms). Count checks all matching nodes; the other predicates require one node, except that hidden also accepts no match. Text comparison collapses whitespace. Shadow-root and Playwright-specific assertion selectors are outside this version. Trigger selectors retain Playwright syntax.
+
 ## Boundaries
 
 A failure must reproduce twice before minimisation. Each deletion candidate must preserve the same assertion signature twice. The reducer finds a deletion-minimal sequence for the supplied timings, not a globally smallest browser program. Reports distinguish non-repeatable failures from confirmed ones. `repro` objects can be saved directly as scenario JSON and rerun.
